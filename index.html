@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hossam Al-Saidi | المبرمج المبدع في عالم التقنية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #0a0a0a;
+            --primary: #00eeff;
+            --secondary: #39ff14;
+            --text: #f0f0f0;
+            --card-bg: rgba(30, 30, 30, 0.7);
+            --transition: all 0.4s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            overflow-x: hidden;
+            direction: rtl;
+        }
+        
+        /* Matrix Background Effect */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        /* Custom Cursor */
+        body {
+            cursor: none;
+        }
+        
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s ease;
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: width 0.3s, height 0.3s, background 0.3s;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(0, 238, 255, 0.2);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+        }
+        
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 7rem 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            color: var(--primary);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        /* Landing Page */
+        #home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .hero-content h1 span {
+            color: var(--secondary);
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+        
+        .typed-text {
+            font-size: 2rem;
+            color: var(--primary);
+            height: 3rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark-bg);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 238, 255, 0.4);
+        }
+        
+        /* Navigation Circles */
+        .nav-circles {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 238, 255, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .nav-circle:hover {
+            background: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 238, 255, 0.3);
+        }
+        
+        .nav-circle:hover .nav-icon {
+            color: var(--dark-bg);
+        }
+        
+        .nav-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-label {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .profile-images {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            flex-shrink: 0;
+        }
+        
+        .profile-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .profile-img.active {
+            opacity: 1;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #ddd;
+        }
+        
+        .timeline {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-right: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: -8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+        
+        .timeline-item h4 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item p {
+            color: #bbb;
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 238, 255, 0.1);
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 238, 255, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .service-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(57, 255, 20, 0.1);
+        }
+        
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            text-align: center;
+        }
+        
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 5px;
+            position: relative;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+        
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: progress-glow 1.5s infinite;
+        }
+        
+        @keyframes progress-glow {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        /* Projects Section */
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--text);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: var(--dark-bg);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 238, 255, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 238, 255, 0.3);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.1);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        }
+        
+        .project-category {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .project-tag {
+            background: rgba(57, 255, 20, 0.2);
+            color: var(--secondary);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 238, 255, 0.1);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover .contact-icon {
+            background: var(--primary);
+            color: var(--dark-bg);
+            transform: scale(1.1);
+        }
+        
+        .contact-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+        }
+        
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 238, 255, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--text);
+            font-family: 'Cairo', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 238, 255, 0.1);
+        }
+        
+        footer p {
+            color: #888;
+        }
+        
+        /* Project Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow: auto;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--dark-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 238, 255, 0.3);
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+        
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            background: var(--primary);
+            color: var(--dark-bg);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .modal-images {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        
+        .modal-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+        
+        .modal-nav-btn {
+            background: rgba(0, 238, 255, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--text);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .modal-nav-btn:hover {
+            background: var(--primary);
+            color: var(--dark-bg);
+        }
+        
+        .modal-description {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            line-height: 1.8;
+        }
+        
+        .system-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .system-nav-btn {
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 238, 255, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--text);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .system-nav-btn.active {
+            background: var(--primary);
+            color: var(--dark-bg);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .section-title::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+            
+            .nav-circles {
+                gap: 1rem;
+            }
+            
+            .nav-circle {
+                width: 70px;
+                height: 70px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                padding: 2rem;
+                align-items: center;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .typed-text {
+                font-size: 1.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .profile-images {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .nav-circles {
+                gap: 0.8rem;
+            }
+            
+            .nav-circle {
+                width: 65px;
+                height: 65px;
+            }
+            
+            .nav-icon {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-circles {
+                gap: 0.6rem;
+            }
+            
+            .nav-circle {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .nav-icon {
+                font-size: 1.3rem;
+            }
+            
+            .nav-label {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Background -->
+    <canvas id="matrix-bg"></canvas>
+    
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Hossam <span>Al-Saydy</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#about">من أنا</a></li>
+            <li><a href="#services">خدماتي</a></li>
+            <li><a href="#skills">مهاراتي</a></li>
+            <li><a href="#projects">أعمالي</a></li>
+            <li><a href="#contact">تواصل معي</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+    
+    <!-- Home Section -->
+    <section id="home">
+        <div class="hero-content">
+            <h1>أنا, <span>حسام الصايدي</span></h1>
+            <p>مبرمج ومطوّر أنظمة وحلول رقمية ذكية</p>
+            <span class="typed-text"></span>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">استعرض أعمالي</a>
+                <a href="#contact" class="btn btn-secondary">تواصل معي</a>
+            </div>
+            
+            <!-- Navigation Circles -->
+            <div class="nav-circles">
+                <div class="nav-circle" data-target="#about">
+                    <i class="nav-icon fas fa-user"></i>
+                    <span class="nav-label">من أنا</span>
+                </div>
+                
+                <div class="nav-circle" data-target="#services">
+                    <i class="nav-icon fas fa-cogs"></i>
+                    <span class="nav-label">خدماتي</span>
+                </div>
+                
+                <div class="nav-circle" data-target="#skills">
+                    <i class="nav-icon fas fa-chart-bar"></i>
+                    <span class="nav-label">مهاراتي</span>
+                </div>
+                
+                <div class="nav-circle" data-target="#projects">
+                    <i class="nav-icon fas fa-briefcase"></i>
+                    <span class="nav-label">أعمالي</span>
+                </div>
+                
+                <div class="nav-circle" data-target="#contact">
+                    <i class="nav-icon fas fa-envelope"></i>
+                    <span class="nav-label">تواصل</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">من أنا</h2>
+        <div class="about-content">
+            <div class="profile-images">
+                <img src="hossam.jpg" alt="Hossam Al-Saidi" class="profile-img active">
+                <img src="hossam1.jpg" alt="Hossam Al-Saidi" class="profile-img">
+                <img src="hossam2.jpg" alt="Hossam Al-Saidi" class="profile-img">
+            </div>
+            <div class="about-text">
+                <h3>حسام الصايدي</h3>
+                <p>أنا حسام الصايدي، تخصص تقنية المعلومات، أعمل على تصميم وتطوير تطبيقات وأنظمة ذكية باستخدام أحدث لغات وتقنيات البرمجة. أؤمن أن البرمجة ليست مهنة فقط، بل فن يغير العالم.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>2025 - الحاضر</h4>
+                        <p>مطور تطبيقات وأنظمة متكاملة</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>2022 - 2024</h4>
+                        <p>مطور ويب وتطبيقات جوال</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>2020 - 2024</h4>
+                        <p>دراسة تقنية المعلومات وتخصص البرمجة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title">خدماتي</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>تطوير تطبيقات Android و iOS</h3>
+                <p>تصميم وتطوير تطبيقات جوال مبتكرة لأنظمة Android و iOS باستخدام Java و Flutter، مع التركيز على تجربة المستخدم والأداء العالي.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>تطوير أنظمة محاسبية</h3>
+                <p>بناء أنظمة محاسبية متكاملة باستخدام C#، Java و Python، توفر حلولاً متقدمة لإدارة الشؤون المالية والمحاسبية.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>تطوير مواقع الويب</h3>
+                <p>تصميم وتطوير مواقع ويب تفاعلية باستخدام أحدث التقنيات مثل HTML5, CSS3, JavaScript, PHP و Laravel.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>تطوير لوحات تحكم</h3>
+                <p>إنشاء لوحات تحكم ومنصات تفاعلية تمكن العملاء من إدارة بياناتهم ومراقبة أداء أعمالهم بسهولة.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>برمجة الألعاب</h3>
+                <p>تصميم وتطوير ألعاب إلكترونية ومشاريع تقنية باستخدام Arduino و C++، مع التركيز على الابتكار والإبداع.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">مهاراتي</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>لغات البرمجة</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">C++</span>
+                        <span class="skill-percentage">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="95"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">C#</span>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Java</span>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-percentage">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>تطوير تطبيقات الجوال ومواقع الويب</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Flutter</span>
+                        <span class="skill-percentage">92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="92"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">HTML/CSS/JS</span>
+                        <span class="skill-percentage">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="95"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">PHP + Laravel</span>
+                        <span class="skill-percentage">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="88"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">React</span>
+                        <span class="skill-percentage">75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="75"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">أعمالي</h2>
+        
+        <div class="projects-filter">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="mobile">تطبيقات الجوال</button>
+            <button class="filter-btn" data-filter="web">مواقع الويب</button>
+            <button class="filter-btn" data-filter="system">أنظمة متكاملة</button>
+            <button class="filter-btn" data-filter="tech">مشاريع تقنية</button>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- Mobile Apps Projects -->
+            <div class="project-card" data-category="mobile" data-project="contractor-app">
+                <img src="App1/img1.jpg" alt="تطبيق إدارة مكتب مقاولات" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">تطبيقات الجوال</span>
+                    <h3 class="project-title">تطبيق إدارة مكتب مقاولات (Java)</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Java</span>
+                        <span class="project-tag">Android</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-category="mobile" data-project="restaurant-app">
+                <img src="App2/img1.png" alt="تطبيق إدارة مطعم" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">تطبيقات الجوال</span>
+                    <h3 class="project-title">تطبيق إدارة مطعم (Flutter)</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">Firebase</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-category="mobile" data-project="jobs-app">
+                <img src="App2/img1.png" alt="تطبيق توظيف" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">تطبيقات الجوال</span>
+                    <h3 class="project-title">تطبيق توظيف (Flutter)</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">API</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Web Projects -->
+            <div class="project-card" data-category="web" data-project="clothing-store">
+                <img src="Web1/img1.jpg" alt="متجر بيع ملابس" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">مواقع الويب</span>
+                    <h3 class="project-title">متجر بيع ملابس (PHP)</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" data-category="web" data-project="tourism-site">
+                <img src="Web2/img1.jpg" alt="موقع سياحي" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">مواقع الويب</span>
+                    <h3 class="project-title">موقع سياحي (HTML, CSS, JS)</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML/CSS</span>
+                        <span class="project-tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Systems Projects -->
+            <div class="project-card" data-category="system" data-project="ecommerce-system">
+                <img src="Store/Logo.jpg" alt="منصة إلكترونية متكاملة" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">أنظمة متكاملة</span>
+                    <h3 class="project-title">منصة إلكترونية متكاملة لمتاجر</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">Laravel</span>
+                        <span class="project-tag">API</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tech Projects -->
+            <div class="project-card" data-category="tech" data-project="robot-project">
+                <img src="Robot/img1.png" alt="روبوت ذكي" class="project-img">
+                <div class="project-overlay">
+                    <span class="project-category">مشاريع تقنية</span>
+                    <h3 class="project-title">روبوت ذكي يتتبع البشر (Arduino + C++)</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Arduino</span>
+                        <span class="project-tag">C++</span>
+                        <span class="project-tag">Robotics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">تواصل معي</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>البريد الإلكتروني</h4>
+                        <p>hossamalsaydy@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>الهاتف</h4>
+                        <p>+967 778 470 907</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>الموقع</h4>
+                        <p>الجمهورية اليمنية</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://hossamalsaydy.github.io/Eng-Hossam.Com" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://tel.me/967778470907" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="https://wa.me/967778470907" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+           
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 حسام الصايدي | جميع الحقوق محفوظة</p>
+    </footer>
+    
+    <!-- Project Modals -->
+      <!-- Project Modals -->
+    <!-- تطبيق إدارة مكتب مقاولات -->
+    <div id="contractor-app-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">تطبيق إدارة مكتب مقاولات (Java)</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="App1/img2.png" alt="تطبيق مقاولات" class="modal-img">
+                    <img src="App1/img3.png" alt="تطبيق مقاولات" class="modal-img">
+                    <img src="App1/img4.png" alt="تطبيق مقاولات" class="modal-img">
+                </div>
+                <div class="modal-description">
+                    <p>تطبيق متكامل لإدارة مكاتب المقاولات، يوفر حلولاً شاملة لإدارة المشاريع والعمالة والمعدات.</p>
+                    <ul>
+                        <li>إدارة المشاريع والمهام اليومية</li>
+                        <li>تتبع العمالة وأوقات الحضور والانصراف</li>
+                        <li>إدارة المعدات والآليات والمخازن</li>
+                        <li>تقارير مالية وإحصائية متقدمة</li>
+                        <li>نظام إشعارات للتواصل مع الفريق</li>
+                    </ul>
+                    <p>التقنيات المستخدمة: Java, Android, Firebase, Google Maps API</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- تطبيق إدارة مطعم -->
+    <div id="restaurant-app-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">تطبيق إدارة مطعم (Flutter)</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="App2/img1.png" alt="تطبيق مطعم" class="modal-img">
+                    <img src="App2/img1.png" alt="تطبيق مطعم" class="modal-img">
+                    <img src="App2/img1.png" alt="تطبيق مطعم" class="modal-img">
+                </div>
+                <div class="modal-description">
+                    <p>نظام متكامل  قيد التطوير لإدارة المطاعم يربط بين إدارة المطبخ والطاولات والمخزون والمبيعات.</p>
+                    <ul>
+                        <li>إدارة القائمة والطلبات في الوقت الحقيقي</li>
+                        <li>تخصيص الطلبات وتقسيمها إلى المطبخ</li>
+                        <li>نظام حجوزات الطاولات وإدارة المواعيد</li>
+                        <li>إدارة المخزون والمواد الخام</li>
+                        <li>تقارير المبيعات والأرباح اليومية</li>
+                    </ul>
+                    <p>التقنيات المستخدمة: Flutter, Firebase, Node.js, Stripe API</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div id="jobs-app-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">تطبيق توظيف (Flutter)</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="App2/img1.png" alt="تطبيق توظيف" class="modal-img">
+                    <img src="App2/img1.png" alt="تطبيق توظيف" class="modal-img">
+                    <img src="App2/img1.png" alt="تطبيق توظيف" class="modal-img">
+                </div>
+                <div class="modal-description">
+                    <p>تطبيق توظيف متكامل قيد التطوير يوفر منصة للباحثين عن عمل وأصحاب العمل للتواصل والتفاعل. يحتوي التطبيق على:</p>
+                    <ul>
+                        <li>إنشاء سيرة ذاتية متكاملة</li>
+                        <li>بحث عن وظائف حسب التخصص والموقع</li>
+                        <li>نظام مراسلة بين الباحثين وأصحاب العمل</li>
+                        <li>تحديثات فورية عن الوظائف الجديدة</li>
+                        <li>نظام تقييم للباحثين وأصحاب العمل</li>
+                    </ul>
+                    <p>التقنيات المستخدمة: Flutter, Firebase, API, Google Maps</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <!-- تطبيق العلاج الطبيعي -->
+    <div id="physiotherapy-app-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">تطبيق العلاج الطبيعي (Flutter)</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="App2/img1.png" alt="تطبيق العلاج الطبيعي" class="modal-img">
+                    <img src="App2/img1.png" alt="تطبيق العلاج الطبيعي" class="modal-img">
+                    <img src="App2/img1.png" alt="تطبيق العلاج الطبيعي" class="modal-img">
+                </div>
+                <div class="modal-description">
+                    <p>تطبيق متخصص قيد التطوير لإدارة مراكز العلاج الطبيعي وتمارين المتابعة المنزلية.</p>
+                    <ul>
+                        <li>حجز مواعيد مع المعالجين المتخصصين</li>
+                        <li>تتبع تطور حالة المريض وتقارير الجلسات</li>
+                        <li>تمارين منزلية مصورة مع تتبع الأداء</li>
+                        <li>نظام إشعارات لتذكير المريض بالجلسات والتمارين</li>
+                        <li>إدارة الفواتير والمدفوعات الإلكترونية</li>
+                    </ul>
+                    <p>التقنيات المستخدمة: Flutter, Firebase, Health API, Stripe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- متجر بيع ملابس -->
+    <div id="clothing-store-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">متجر بيع ملابس (PHP)</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="Web1/img1.jpg" alt="متجر ملابس" class="modal-img">
+                    <img src="Web1/img2.jpg" alt="متجر ملابس" class="modal-img">
+                 
+                </div>
+                <div class="modal-description">
+                    <p>منصة إلكترونية متكاملة لبيع الملابس بتجربة مستخدم فريدة.</p>
+                    <ul>
+                        <li>عرض المنتجات بتصميم عصري مع فلترة متقدمة</li>
+                        <li>نظام تقييمات وتقييمات للعملاء</li>
+                        <li>عربة تسوق متطورة مع خيارات دفع متعددة</li>
+                        <li>لوحة تحكم لإدارة المنتجات والمبيعات</li>
+                        <li>نظام توصيل مع تتبع الطلبات</li>
+                    </ul>
+                    <p>التقنيات المستخدمة: PHP, MySQL, JavaScript, Bootstrap, PayPal API</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- موقع سياحي -->
+    <div id="tourism-site-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">موقع سياحي (HTML, CSS, JS)</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="Web2/img1.jpg" alt="موقع سياحي" class="modal-img">
+                    <img src="Web2/img2.jpg" alt="موقع سياحي" class="modal-img">
+                    <img src="Web2/img1.jpg" alt="موقع سياحي" class="modal-img">
+                </div>
+                <div class="modal-description">
+                    <p>بوابة سياحية شاملة تقدم معلومات تفصيلية عن الوجهات السياحية.</p>
+                    <ul>
+                        <li>عرض الوجهات السياحية مع صور ومعلومات مفصلة</li>
+                        <li>حجز الفنادق والجولات السياحية</li>
+                        <li>دليل المطاعم والأنشطة السياحية</li>
+                        <li>نظام تقييمات وتوصيات</li>
+                        <li>مدونة سياحية بمقالات ونصائح السفر</li>
+                    </ul>
+                    <p>التقنيات المستخدمة: HTML5, CSS3, JavaScript, Google Maps API</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="ecommerce-system-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">منصة إلكترونية متكاملة لمتاجر</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="system-nav">
+                    <button class="system-nav-btn active" data-target="client">تطبيق العملاء</button>
+                    <button class="system-nav-btn" data-target="merchant">تطبيق التجار</button>
+                    <button class="system-nav-btn" data-target="dashboard">لوحة التحكم</button>
+                </div>
+                
+                <div id="client-section">
+                    <div class="modal-images">
+                        <img src="Store/App1/img1.jpg" alt="تطبيق العملاء" class="modal-img">
+                        <img src="Store/App1/img2.jpg" alt="تطبيق العملاء" class="modal-img">
+                    </div>
+                    <div class="modal-description">
+                        <h4>تطبيق العملاء (Flutter)</h4>
+                        <p>تطبيق مخصص للعملاء يمكنهم من:</p>
+                        <ul>
+                            <li>تصفح المنتجات حسب التصنيفات</li>
+                            <li>إضافة المنتجات إلى عربة التسوق</li>
+                            <li>إتمام عملية الشراء بخطوات سهلة</li>
+                            <li>تتبع الطلبات في الوقت الفعلي</li>
+                            <li>تقييم المنتجات والتجار</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="merchant-section" style="display:none">
+                    <div class="Store/App2/img1.jpg" alt="تطبيق التجار" class="modal-img">
+                        <img src="Store/App2/img2.jpg" alt="تطبيق التجار" class="modal-img">
+                    </div>
+                    <div class="modal-description">
+                        <h4>تطبيق التجار (Flutter)</h4>
+                        <p>تطبيق مخصص للتجار يمكنهم من:</p>
+                        <ul>
+                            <li>إدارة المخزون والمنتجات</li>
+                            <li>تتبع الطلبات والشحنات</li>
+                            <li>إدارة المبيعات والإيرادات</li>
+                            <li>التواصل مع العملاء</li>
+                            <li>تلقي الإشعارات والتنبيهات</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="dashboard-section" style="display:none">
+                    <div class="Store/Web/img1.png" alt="لوحة التحكم" class="modal-img">
+                        <img src="Store/Web/img2.png" alt="لوحة التحكم" class="modal-img">
+                    </div>
+                    <div class="modal-description">
+                        <h4>لوحة التحكم (Laravel + API)</h4>
+                        <p>لوحة تحكم إدارية تمكن من:</p>
+                        <ul>
+                            <li>إدارة المتاجر والتجار</li>
+                            <li>مراقبة المبيعات والإيرادات</li>
+                            <li>إدارة العملاء والمستخدمين</li>
+                            <li>إنشاء التقارير والإحصائيات</li>
+                            <li>إدارة الإعدادات العامة للمنصة</li>
+                        </ul>
+                        <p>التقنيات المستخدمة: Laravel, MySQL, API, AdminLTE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <!-- روبوت ذكي -->
+    <div id="robot-project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">روبوت ذكي يتتبع البشر (Arduino + C++)</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="Robot/img1.png" alt="روبوت ذكي" class="modal-img">
+                    <img src="Robot/img2.png" alt="روبوت ذكي" class="modal-img">
+                    <img src="Robot/img3.png" alt="روبوت ذكي" class="modal-img">
+                </div>
+                <div class="modal-description">
+                    <p>روبوت ذكي قادر على تتبع الحركة وتجنب العقبات باستخدام الذكاء الاصطناعي.</p>
+                    <ul>
+                        <li>كشف الحركة باستخدام مستشعرات الأشعة تحت الحمراء</li>
+                        <li>تحديد المسار الأمثل باستخدام خوارزميات الذكاء الاصطناعي</li>
+                        <li>تجنب العقبات تلقائياً</li>
+                        <li>تحكم عن بعد عبر تطبيق جوال</li>
+                        <li>نظام شحن ذاتي عند انخفاض البطارية</li>
+                    </ul>
+                    <p>التقنيات المستخدمة: Arduino, C++, Raspberry Pi, Python, OpenCV</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Other modals would be defined here -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script>
+        // Matrix Background Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const characters = '01';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        
+        for(let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height);
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00eeff';
+            ctx.font = `${fontSize}px monospace`;
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 35);
+        
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+        
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                cursor.style.borderColor = '#39ff14';
+                cursorFollower.style.width = '30px';
+                cursorFollower.style.height = '30px';
+                cursorFollower.style.background = '#39ff14';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.borderColor = '#00eeff';
+                cursorFollower.style.width = '8px';
+                cursorFollower.style.height = '8px';
+                cursorFollower.style.background = '#00eeff';
+            });
+        });
+        
+        // Typed Text Effect
+        const typed = new Typed('.typed-text', {
+            strings: [
+                'مبرمج تطبيقات',
+                'مطوّر ويب',
+                'مطوّر ألعاب',
+                'مطوّر أنظمة محاسبية',
+                'مهتم بالذكاء الاصطناعي'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true,
+            showCursor: false
+        });
+        
+        // Profile Image Rotation
+        const profileImages = document.querySelectorAll('.profile-img');
+        let currentImage = 0;
+        
+        function rotateProfileImages() {
+            profileImages.forEach(img => img.classList.remove('active'));
+            currentImage = (currentImage + 1) % profileImages.length;
+            profileImages[currentImage].classList.add('active');
+        }
+        
+        setInterval(rotateProfileImages, 5000);
+        
+        // Skills Animation
+        const skillProgressBars = document.querySelectorAll('.skill-progress');
+        
+        function animateSkills() {
+            skillProgressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = `${width}%`;
+            });
+        }
+        
+        // Projects Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if(filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Navigation Circles
+        const navCircles = document.querySelectorAll('.nav-circle');
+        
+        navCircles.forEach(circle => {
+            circle.addEventListener('click', () => {
+                const target = circle.getAttribute('data-target');
+                document.querySelector(target).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Project Modals
+        const projectCardsModal = document.querySelectorAll('.project-card');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+        
+        projectCardsModal.forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.getAttribute('data-project');
+                const modal = document.getElementById(`${projectId}-modal`);
+                
+                if(modal) {
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // System Navigation in Modal
+        const systemNavBtns = document.querySelectorAll('.system-nav-btn');
+        
+        systemNavBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                systemNavBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const target = btn.getAttribute('data-target');
+                
+                // Hide all sections
+                document.querySelectorAll('#client-section, #merchant-section, #dashboard-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show target section
+                document.getElementById(`${target}-section`).style.display = 'block';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            modals.forEach(modal => {
+                if(e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+        
+        // Scroll Animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.skill-progress, .service-card, .project-card');
+            
+            elements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if(elementTop < windowHeight * 0.9) {
+                    if(el.classList.contains('skill-progress')) {
+                        animateSkills();
+                    } else {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }
+                }
+            });
+        }
+        
+        // Initialize animations on scroll
+        window.addEventListener('scroll', handleScrollAnimations);
+        window.addEventListener('load', handleScrollAnimations);
+        
+        // Resize handling
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
